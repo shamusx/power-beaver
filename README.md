@@ -72,7 +72,7 @@ app-analytics-client
 
 Find and delete some pools:
 ```
-~$ for pool in $(./avicli.py --controller avi-ako-1 pool list | jq -r .[].uuid); do echo $pool; ./avicli.py --controller avi-ako-1 pool delete $pool; done
+~$ for pool in $(./avicli.py --controller cc-a pool list | jq -r .[].uuid); do echo $pool; ./avicli.py --controller avi-ako-1 pool delete $pool; done
 pool-9eea9ff3-ad60-412d-b9ed-2a95931f9431
 pool-ede70601-2b5e-4d21-9c7b-7fd304962277
 pool-e4e52920-3e09-43e8-8cde-1193d5c20c45
@@ -83,3 +83,6 @@ pool-fcb0c405-9ad2-4416-83e1-18e7c6cea6b3
 pool-551e0137-10e2-492b-a861-6e36739478e2
 pool-59370e8b-0074-42f1-910c-e04e1f251652
 ```
+
+Find GSLB Domain Names and run DNS lookup against GSLB Service that is in UP status:
+for i in $(avicli.py —controller cc-a —tenant ‘*’ gslbservice-inventory list | jq -r ‘,[] | select.runtime.oper_status.state == “OPER_IP”) .config.domain_names[]’); do dig $i @10.10.10.53; done
