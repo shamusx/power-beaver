@@ -1,5 +1,5 @@
 controllers:
-  avi-cluster-1:
+  cc-a:
     auth:
       cluster_ip: 192.168.1.2
       username: "admin"
