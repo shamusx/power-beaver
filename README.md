@@ -85,4 +85,6 @@ pool-59370e8b-0074-42f1-910c-e04e1f251652
 ```
 
 Find GSLB Domain Names and run DNS lookup against GSLB Service that is in UP status:
+```
 for i in $(avicli.py —controller cc-a —tenant ‘*’ gslbservice-inventory list | jq -r ‘,[] | select.runtime.oper_status.state == “OPER_IP”) .config.domain_names[]’); do dig $i @10.10.10.53; done
+```
