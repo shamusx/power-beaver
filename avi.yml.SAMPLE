@@ -1,0 +1,7 @@
+controllers:
+  cc-a:
+    auth:
+      cluster_ip: 192.168.1.2
+      username: "admin"
+      password: "power-beaver"
+      tenant_name: admin
