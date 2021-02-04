@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.7
 import argparse
 import yaml
 import json
@@ -76,6 +76,13 @@ class AviSession(object):
         response = self._api.get(self._prefix + path, headers=self.headers, params=self.params)
         response.raise_for_status()
         print(json.dumps(response.json()['results']))
+
+    def export(self, path):
+        params = self.params
+        exportApi = "configuration/export/"
+        response = self._api.get(self._prefix + exportApi+path, headers=self.headers, params=self.params)
+        response.raise_for_status()
+        print(json.dumps(response.json()))
 
     def delete(self, path):
         params = self.params
