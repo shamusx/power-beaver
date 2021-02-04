@@ -88,3 +88,8 @@ Find GSLB Domain Names and run DNS lookup against GSLB Service that is in UP sta
 ```
 for i in $(avicli.py —controller cc-a —tenant ‘*’ gslbservice-inventory list | jq -r ‘,[] | select.runtime.oper_status.state == “OPER_IP”) .config.domain_names[]’); do dig $i @10.10.10.53; done
 ```
+
+Export Configuration of individual VirtualService
+```
+for i in `./avicli.py --controller cc-a virtualservice list | jq .[].uuid | tr -d '"'`; do ./avicli.py --controller cc-a virtualservice/$i export ;done
+```
